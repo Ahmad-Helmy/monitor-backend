@@ -146,7 +146,7 @@ io.on('connection',  (socket) => {
         const rCL =tempRangeAVG;
         const rLCL = 0*tempRangeAVG
 
-        const reads={
+        const read={
           duration:tempSender.reads.length/5,
           ecg:ecgSender.reads,
           emg:emgSender.reads,
@@ -164,14 +164,10 @@ io.on('connection',  (socket) => {
             range:tempSamplesRange
           },
         }
-        PatientModel.findByIdAndUpdate(data.id,{
-          $push:{
-            reads
-          }
-        }).then(()=>{
-          socket.emit("saved")
-        })
-    })
+        
+        const saved = await Patient.pushRead(data.id,read)
+        if (saved) socket.emit("saved")
+      })
   })
 
 })

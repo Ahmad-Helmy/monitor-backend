@@ -40,6 +40,21 @@ router.post('/',async(req,res)=>{
     }
 })
 
+export async function pushRead(patientId,read) {
+
+    try {
+        await Patient.findByIdAndUpdate(patientId,{
+            $push:{
+              reads:read
+            }
+          })
+          return true
+        
+    } catch (error) {
+        return false
+    }
+}
+
 
 
 module.exports=router
