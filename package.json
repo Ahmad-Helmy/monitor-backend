@@ -1,0 +1,21 @@
+{
+  "name": "arduinonodejstemp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "mongoose": "^4.13.21",
+    "nodemon": "^1.19.4",
+    "serialport": "^9.0.4",
+    "socket.io": "^2.3.0"
+  }
+}
