@@ -1,3 +1,4 @@
+
 const express=require('express')
 const router =express.Router()
 const Patient=require('../models/patient.model')
@@ -40,7 +41,7 @@ router.post('/',async(req,res)=>{
     }
 })
 
-export async function pushRead(patientId,read) {
+async function pushRead(patientId,read) {
 
     try {
         await Patient.findByIdAndUpdate(patientId,{
@@ -57,4 +58,4 @@ export async function pushRead(patientId,read) {
 
 
 
-module.exports=router
+module.exports={Patient:router,pushRead}

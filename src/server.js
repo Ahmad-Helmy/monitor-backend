@@ -15,8 +15,7 @@ const PatientModel=require('./models/patient.model')
 const fs=require('fs')
 const port =require('./helpers/port')
 
-const Patient=require('./routes/patient');
-const { report } = require("./routes/patient");
+const { Patient,pushRead } = require("./routes/patient");
 const  START=0
 const  LIMIT=100
 
@@ -118,12 +117,12 @@ io.on('connection',  (socket) => {
         emgSender.stop()
         tempSender.stop()
     })
-    socket.on('saveData',()=>{
+    socket.on('saveData', async ()=>{
         ecgSender.end()
         emgSender.end()
         tempSender.end() 
 
-        const tempSamples=getSamples(3,tempSender.reads)
+        const tempSamples=getSamples(3,tempReader.reads)
 
         const tempSamplesAVG=[]
         const tempSamplesRange=[]
@@ -165,7 +164,7 @@ io.on('connection',  (socket) => {
           },
         }
         
-        const saved = await Patient.pushRead(data.id,read)
+        const saved = await pushRead(data.id,read)
         if (saved) socket.emit("saved")
       })
   })

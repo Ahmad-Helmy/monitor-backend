@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 
 const patientSchema= new mongoose.Schema({
     name:String,
+
     age:Number,
+    
     reads:[{
         time:{type:Date,default:new Date()},
         duration:Number,
